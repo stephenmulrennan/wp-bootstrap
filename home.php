@@ -25,21 +25,26 @@
 		</div>
 		<?php query_posts('category_name=Home'); ?>
 			<?php if(have_posts()) : ?>
-			<div class="row showcase">
+			
 				<?php while (have_posts()) : the_post();
 				?>
-				<div class="col-md-4">
+				<?php if (($wp_query->current_post % 4) == 0): ?>
+					<div class="row showcase">
+				<?php endif;?>
+				<div class="col-md-3">
 				    <div class="thumbnail">
 				      <div class="caption">
 				        <h3><?php the_title();?></h3>
 				      </div>
 				      <a href="<?php the_permalink() ?>" class="thumbnail">
-				        <img src="<?php bloginfo('template_directory');?>/images/art/<?php get_custom_field_value('thumbnail', true);?>" alt="" />
+				        <img src="<?php bloginfo('template_directory');?>/images/art/<?php get_custom_field_value('highlight', true, 'general_litigation.jpg');?>" alt="" />
 				      </a>
 				      <a class="btn btn-primary" href="<?php the_permalink() ?>">Learn more &raquo;</a>
 				    </div>
 				  </div>
-
+				  <?php if (($wp_query->current_post % 4) == 3): ?>
+					</div>
+				  <?php endif;?>
 				
 				<?php endwhile;?>
 			</div>

@@ -30,9 +30,9 @@
 				<p><?php _e('Sorry, this page does not exist.'); ?></p>
 			<?php endif; ?>
 		</div>
-		<div class="col-md-3">
+		<div class="servicesSidebar col-md-3">
 			<?php include('php/news-widget.php'); ?>
-			<?php include('php/nav-services.php'); ?>
+			<?php include('php/nav-collapse-services.php'); ?>
 		</div><!-- sidebar -->
 	</div>
 </div><!-- content -->

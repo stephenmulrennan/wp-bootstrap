@@ -7,13 +7,19 @@
 @headerHighlight: white;
 @customBodyBackground: lighten(@headerBackground, 30%);
 @headerAction:darken(@headerBackground,20%);
+@footerHeight:200px;
+@footerCopyrightHeight:40px;
 
 body {
   #gradient > .vertical(white, white);
 }
 
-#servicesSidebar {
+.servicesSidebar {
   padding-right:0;
+  
+  @media (max-width: @screen-xs-max) {
+    padding-left:0; 
+  }
 }
 
 .btn  {
@@ -58,7 +64,20 @@ body {
     margin-bottom:10px;
     text-align:center;
   }
-  
+  @media (min-width: @screen-sm) {
+    [class*='col-'] {
+      padding-left:10px;
+      padding-right:10px;
+      &:first-child {
+        padding-left:0;
+        padding-right:20px;  
+      }
+      &:nth-child(4) {
+        padding-right:0;
+        padding-left:20px;
+      }
+    }  
+  }
 }
 
 #header {
@@ -140,17 +159,6 @@ body {
   }
 }
 
-ul .nav {
-
-  color: white;
-  #gradient > .horizontal(#222222, #111111);
-  background-color: #1b1b1b;
-  border: 1px solid #555555; 
-}
-
-.navbar-search {
-  margin-right: 30px;
-}
 html, body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
@@ -161,26 +169,43 @@ html, body {
   height: auto !important;
   height: 100%;
   /* Negative indent footer by it's height */
-  margin: 0 auto -140px;
+  margin: 0 auto -@footerHeight;
 }
 /* Set the fixed height of the footer here */
 #push, #footer {
   margin-top: 20px;
-  height: 140px;
+  height: @footerHeight;
+  footer {
+    height:100%;
+  }
 }
 #footer {
   color: #999999;
   background-color:#383938;
   zoom: 1;
 }
+#footerCopyright {
+  background-color:black;
+  line-height:30px;
+  text-align:middle;
+  position:relative;
+  bottom:0;
+  p {
+    margin:10px;
+  }
+}
 
 #footerContent {
   padding: 20px;
+  height:calc(@footerHeight - @footerCopyrightHeight);
+  @media (max-width: @screen-xs-max) {
+    height:calc(@footerHeight + 40px - @footerCopyrightHeight);
+  }
 }
 /* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
+@media (max-width: @screen-xs-max) {
   #footer {
-    height:220px;
+    height:calc(@footerHeight + 40px);
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
@@ -198,18 +223,12 @@ html, body {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
 #questions {
   text-align: center;
-  border: 1px solid @headerAction;
+  border: 1px solid #CCC;
   
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
   color: #333333;
   text-shadow:none;
   margin-top:15px;  
@@ -228,15 +247,16 @@ html, body {
       margin-bottom:20px;
     }
   }
+  
+  @media (max-width: @screen-xs-max) {
+    border:0; 
+  }
 }
 
 #newsCarousel {
   text-align: center;
   border: 1px solid @headerAction;
   margin-bottom:15px;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
   background-color:white;
   color: #333333;
   text-shadow:none;
@@ -251,28 +271,78 @@ html, body {
   margin-top:15px;
 }
     
-  
-#servicesList {
-  background-color:white;
-  border: 1px solid @headerAction;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  color: #333333;
-  
+.callme {
+  margin:0;
+  padding:0;
   a {
-    border-bottom:1px solid @headerBackground;
-    color: #333333;
-    text-shadow:none;
-    &:hover {
-      background-color:@headerBackground;
-      color:white;
-    }
+    display:block;
   }
+} 
+
+#servicesList {
   
-  .active > a {
-    background-color:@headerBackground;
-    color:white;  
+  > ul {
+    .active {
+      background-color:@headerAction;  
+      color:white;  
+    }
+
+    a {
+      padding:0;
+      color:inherit;
+      background-color:inherit;
+    }
+    
+    li {
+      background-color:white;  
+      color:@headerAction;
+      &:hover, &:focus {
+        color:white;
+        background-color:@headerAction; 
+      }
+    }
+    
+    .title {
+      padding-left:10px;
+    }
+    
+    .parent {
+      li {
+        border-bottom:1px solid #CCC;
+        border-left:1px solid #CCC;
+        border-right:1px solid #CCC;
+      }
+      li:last-child {
+        border-bottom:0; 
+      }
+      > a{
+        display:inline-block;
+      }
+      ul .title {
+        padding-left:20px;
+      }
+      ul .placeholder {
+        padding-left:20px;
+      }
+    }
+    
+    .placeholder {
+      display:inline-block;
+      width:35px;
+      height:35px;
+      padding:10px;
+    }
+    
+    > li {
+      background-color:@headerBackground;
+      border-bottom:1px solid #CCC;    
+      &:hover, a:hover {
+        background-color:@headerAction; 
+      } 
+      > a{
+        color:white; 
+      }
+    }
   }
 }
 
@@ -291,9 +361,6 @@ html, body {
   background-color:@headerAction;
   border: 1px solid #111111;
   zoom: 1;
-  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.065);
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.065);
 }
 
 .jumbotron #newsCarousel hr {
@@ -313,17 +380,17 @@ html, body {
 }
 
 .site-content {
-  background-color: white;
   padding:20px;
-  border: 1px solid @headerAction;
+  border: 1px solid #CCC;
   
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
   height:100%;
   
   h1,h2,h3,h4,h5,h6 {
     color: #515151;
+  }
+  
+  @media (max-width: @screen-xs-max) {
+    border:0; 
   }
 }
  
@@ -331,22 +398,16 @@ html, body {
    float:right;
    margin-top:20px;
    
-   @media (max-width: 767px) {
+   @media (max-width: @screen-xs-max) {
      float:none;
      margin-top:none;
      margin-bottom:10px;
    }
  }
  
- .form-group > div > span {
+.form-group > div > span {
    color:red;
- }
- 
- .fixed p {
-  min-height:150px;
-  max-height:150px;
-  overflow:hidden;
-}
+} 
 
 h1 {
   font-size:24.5px;
@@ -363,11 +424,20 @@ h2 {
   }
 }
 
+.servicesHighlight {
+  border: 1px solid #CCC;
+  border-radius:0;
+}
+
 .mega-menu {
   width:100%;
   background-color:@headerAction;
   border:0;
   color:white;
+  
+  > div > ul > li > a {
+    font-weight:700;
+  }
   
   a {
     &:link {
@@ -381,14 +451,31 @@ h2 {
     }
   }
   
-  @media (min-width: @screen-md-min) {
+  @media (max-width: @screen-xs-max) {
+    li, ul, a {
+      display:block;
+      width:100%;
+      padding-left:0;
+      margin:0;
+    }
+    a {
+      line-height: 20px;
+      padding: 10px 15px 10px 15px;
+      &:focus {
+        background-color:@headerAction;
+        color:white;
+      }
+    }
+  }
+   
+  @media (min-width: @screen-sm) {
     width:600px;
     li {
       display:inline;
     }
     
     ul {
-      width:30%;
+      width:45%;
       min-height:50px;
       margin:5px;
       vertical-align:top;
@@ -397,8 +484,8 @@ h2 {
       ul {
         width:100%;
         display:block;
-        padding-left:5px;
-        list-style: square inside none;
+        padding-left:10px;
+        list-style: square outside none;
         margin-top:0;
         
         li {
@@ -409,3 +496,12 @@ h2 {
   }
 }
 
+.qtrans_language_chooser {
+  list-style-type:none;
+  
+  li {
+    display:inline;
+    float:left; 
+    margin-right:3px;
+  }  
+}

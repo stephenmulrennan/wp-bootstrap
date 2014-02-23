@@ -78,7 +78,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="servicesSidebar col-md-4">
 			<h3>How to find us</h3>
 			<hr>
 			<p>

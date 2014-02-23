@@ -1,11 +1,21 @@
 <?php 
-
-	require_once('php/megamenu-walker.php');
+	if(false) {
+		ini_set('display_errors', 'On');
+		error_reporting(E_ALL);	
+	}
 	
-	function get_custom_field_value($szKey, $bPrint = false) 
+	require_once('php/megamenu-walker.php');
+	require_once('php/vertical-nav-walker.php');
+	
+	function get_custom_field_value($szKey, $bPrint = false, $default) 
 	{
 		global $post;
-		$szValue = get_post_meta($post->ID, $szKey, true);
+		if(get_post_meta($post->ID, $szKey, true)) {
+			$szValue = get_post_meta($post->ID, $szKey, true);
+		}
+		else {
+			$szValue = $default;
+		}
 		if ( $bPrint == false ) return $szValue; else echo $szValue;
 	}
 	
@@ -103,6 +113,8 @@
 	function register_my_menus() {
 		register_nav_menus( array(
 			'primary' => __( 'Primary Menu', 'WP Mega Menu 1.0' ),
+			'sidebar' => __('Sidebar Menu', 'Sidebar manu'),
+			'footer' => __('Footer Navigation', 'Footer Navigation')
 		) );
 	}
 	

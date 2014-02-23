@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><?php bloginfo('name'); ?></title>
+	<title><?php wp_title(); ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le styles -->
 	<link href="<?php bloginfo('template_directory');?>/css/toastr.css" rel="stylesheet">
@@ -18,6 +18,11 @@
 	<div id="wrap">
 		<div id="header">
 			<div class="container">
+				<div class="row language_selector">
+					<div class="col-md-2 col-md-offset-10">
+						<?php echo qtrans_generateLanguageSelectCode('dropdown'); ?>
+					</div>
+				</div>
 				<header class="row" id="pageHeader">
 				    <div class="col-md-6">
 				        <div id="logo">
@@ -78,15 +83,14 @@
 						</button>
 					  </li>
 					</ul>
-				    
 				</div>
 			  </div>
 			</nav>
-			
-			<div class="row visible-xs">
-				<div class="span12">
-					<a href='tel://+442890209241'><button class="btn btn-info btn-large" style="width:100%;margin-bottom:5px"><i class="icon-user icon-white"></i>Call Me</button></a>
-					<a href='sms://+442890209241?body=Call me'><button class="btn btn-info btn-large" style="width:100%;margin-bottom:5px"><i class="icon-comment icon-white"></i>Text Me</button></a>
+			<div class="container visible-xs">
+				<div class="row">
+					<div class="col-xs-12 callme">
+						<a href='tel://<?php echo get_option('contact_phone_url');?>' class="btn"><span class="glyphicon glyphicon-earphone"></span> Call Now</a>
+					</div>
 				</div>
 			</div>
 		</div>
