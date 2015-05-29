@@ -72,7 +72,7 @@
 					}
 				}
 			}
-    		parent::display_element( $item, &$children_elements, $max_depth, $depth, $args, &$output );
+    		parent::display_element( $item, $children_elements, $max_depth, $depth, $args, $output );
 		}
 		
 		function is_active($item){

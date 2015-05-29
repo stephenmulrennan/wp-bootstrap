@@ -18,11 +18,6 @@
 	<div id="wrap">
 		<div id="header">
 			<div class="container">
-				<div class="row language_selector">
-					<div class="col-md-2 col-md-offset-10">
-						<?php echo qtrans_generateLanguageSelectCode('dropdown'); ?>
-					</div>
-				</div>
 				<header class="row" id="pageHeader">
 				    <div class="col-md-6">
 				        <div id="logo">
